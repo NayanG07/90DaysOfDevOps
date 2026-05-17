@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  web:
+    build: ./app
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - frontend
+      - backend
+    restart: on-failure
+    labels:
+      app: "my-app-stack"
+
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: apppass
+      POSTGRES_DB: appdb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U appuser -d appdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+    restart: always
+    labels:
+      app: "my-app-stack"
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - backend
+    restart: always
+    labels:
+      app: "my-app-stack"
+
+volumes:
+  db-data:
+
+networks:
+  frontend:
+  backend:

@@ -1,0 +1,15 @@
+---
+- name: Copy and configure files
+  hosts: all
+  become: true
+  tasks:
+    - name: Create config directory
+      file:
+        path: /etc/terraweek
+        state: directory
+        mode: "0755"
+    - name: Copy config file
+      copy:
+        content: "APP_ENV=production\n"
+        dest: /etc/terraweek/app.conf
+        mode: "0644"

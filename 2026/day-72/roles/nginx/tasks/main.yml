@@ -1,0 +1,15 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+- name: Deploy reverse proxy config
+  template:
+    src: default.conf.j2
+    dest: /etc/nginx/sites-available/default
+  notify: restart nginx
+- name: Start and enable Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: true

@@ -1,0 +1,3 @@
+Line 1: DevOps is a culture of collaboration and automation.
+Line 2: Linux fundamentals are the foundation of every DevOps skill.
+Line 3: Consistency matters more than perfection — show up every day.

@@ -1,0 +1,25 @@
+replicaCount: 2
+namespace: bankapp
+image:
+  repository: shubhamlondhe/bankapp
+  tag: latest
+  pullPolicy: Always
+mysql:
+  image: mysql:8.0
+  storage: 1Gi
+ollama:
+  image: ollama/ollama:latest
+  storage: 10Gi
+  model: gemma:2b
+service:
+  type: NodePort
+  port: 8080
+  nodePort: 30080
+resources:
+  requests: { cpu: 200m, memory: 256Mi }
+  limits: { cpu: 500m, memory: 512Mi }
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  cpuPercent: 50

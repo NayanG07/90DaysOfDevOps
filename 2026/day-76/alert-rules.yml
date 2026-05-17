@@ -1,0 +1,23 @@
+groups:
+  - name: instance
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels: { severity: critical }
+        annotations: { summary: "CPU > 80%" }
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90
+        for: 5m
+        labels: { severity: critical }
+        annotations: { summary: "Memory > 90%" }
+      - alert: ContainerDown
+        expr: time() - container_last_seen{container_label_com_docker_compose_service!=""} > 30
+        for: 1m
+        labels: { severity: warning }
+        annotations: { summary: "Container down" }
+      - alert: TargetDown
+        expr: up == 0
+        for: 1m
+        labels: { severity: critical }
+        annotations: { summary: "Target {{ $labels.job }} down" }

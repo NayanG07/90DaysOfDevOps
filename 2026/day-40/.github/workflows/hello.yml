@@ -1,0 +1,17 @@
+name: Hello Workflow
+on: [push]
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print greeting
+        run: echo "Hello from GitHub Actions!"
+      - name: Print date
+        run: echo "Date: $(date)"
+      - name: Print branch
+        run: echo "Branch: ${{ github.ref_name }}"
+      - name: List files
+        run: ls -la
+      - name: Print OS
+        run: echo "OS: ${{ runner.os }}"

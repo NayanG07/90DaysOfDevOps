@@ -1,0 +1,7 @@
+# Nginx Access Logs (from deployed instance)
+192.168.1.1 - - [16/May/2026:10:15:01 +0000] "GET / HTTP/1.1" 200 612 "-" "Mozilla/5.0"
+192.168.1.2 - - [16/May/2026:10:15:05 +0000] "GET /favicon.ico HTTP/1.1" 404 153 "-" "Mozilla/5.0"
+10.0.0.1 - - [16/May/2026:10:16:00 +0000] "GET / HTTP/1.1" 200 612 "-" "curl/7.88"
+
+# Nginx Error Logs
+2026/05/16 10:15:05 [error] 1234#1234: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory)

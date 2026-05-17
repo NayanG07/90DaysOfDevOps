@@ -1,0 +1,14 @@
+---
+- name: Setup Docker on app servers
+  hosts: docker-hosts
+  become: true
+  roles:
+    - docker
+
+- name: Setup Nginx reverse proxy
+  hosts: nginx-hosts
+  become: true
+  vars:
+    docker_host: "app-01"
+  roles:
+    - nginx

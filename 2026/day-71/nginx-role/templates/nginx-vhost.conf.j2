@@ -1,0 +1,10 @@
+# Managed by Ansible — do not edit manually
+server {
+    listen {{ http_port | default(80) }};
+    server_name {{ ansible_hostname }};
+    root {{ web_root | default("/var/www/html") }};
+    index index.html;
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

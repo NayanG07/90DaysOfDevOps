@@ -1,0 +1,11 @@
+name: Kirito
+role: DevOps Engineer
+experience_years: 3
+learning: true
+tools:
+  - Docker
+  - Kubernetes
+  - Terraform
+  - Ansible
+  - GitHub Actions
+hobbies: [coding, reading, gaming]

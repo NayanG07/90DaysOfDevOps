@@ -1,0 +1,15 @@
+---
+- name: Conditional tasks per OS
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Nginx on Debian
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == "Debian"
+    - name: Install Nginx on RHEL
+      yum:
+        name: nginx
+        state: present
+      when: ansible_os_family == "RedHat"
